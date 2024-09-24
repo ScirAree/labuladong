@@ -38,6 +38,7 @@ public static ListNode reverseListRecursion(ListNode head){
 //反转链表前N个节点 递归实现
 static ListNode successor = null;
 
+
 //反转链表前N个节点 迭代实现
 public static ListNode reverseN(ListNode head, int n) {
 
@@ -59,6 +60,8 @@ public static ListNode reverseN(ListNode head, int n) {
     return pre;
 }
 
+
+//反转链表前N个节点 递归实现
 public static ListNode reverseNRecursion(ListNode head, int n) {
     if (n == 1) {
         successor = head.next;
@@ -74,5 +77,4 @@ public static ListNode reverseNRecursion(ListNode head, int n) {
 public static void main(String[] args) {
     ListNode l1 = createSingleLinkedList(new int[]{1,8,5,3,9,6,76,45,454,4,5,5,5,6});
     ListNode l2 = createSingleLinkedList(new int[]{2,3,4});
-    ListNode head = reverseNRecursion(l2, 4);
 }
