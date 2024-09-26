@@ -80,8 +80,17 @@ public static ListNode reverseNRecursion(ListNode head, int n) {
 
 
 //反转链表的一部分
-//public static ListNode reverseBetween(ListNode head, int m, int n) {
-//}
+public static ListNode reverseBetween(ListNode head, int m, int n) {
+    if (m == 1) {
+        return reverseN(head, n);
+    }
+    ListNode pre = head;
+    for (int i = 1; i < m - 1; i++) {
+        pre = pre.next;
+    }
+    pre.next = reverseN(pre.next, n - m + 1);
+    return head;
+}
 
 
 //反转链表结点
@@ -111,8 +120,6 @@ public static ListNode reverseKGroup(ListNode head, int k) {
     a.next = reverseKGroup(b, k);
     return newHead;
 }
-
-
 
 
 public static void main(String[] args) {
