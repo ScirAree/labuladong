@@ -61,8 +61,74 @@ public static void moveZeros(int[] nums) {
 }
 
 
+//二分查找
+public static int binarySearch(int[] nums, int target) {
+    int left = 0;
+    int right = nums.length - 1;
+    while (left <= right) {
+        int mid = (left + right) / 2;
+        if (nums[mid] == target) return mid;
+        else if (nums[mid] < target) left = mid + 1;
+        else if (nums[mid] > target) right = mid - 1;
+    }
+    return -1;
+}
+
+
+//俩数之和
+public static int[] towSun(int[] nums, int target) {
+    int left = 0;
+    int right = nums.length - 1;
+
+    while (left < right) {
+        int sum = nums[left] + nums[right];
+        if (sum == target) {
+            // 题目要求的索引是从 1 开始的
+            return new int[]{left + 1, right + 1};
+        } else if (sum < target) {
+            // 让 sum 大一点
+            left++;
+        } else if (sum > target) {
+            // 让 sum 小一点
+            right--;
+        }
+    }
+    return new int[]{-1, -1};
+}
+
+
+//反转数组
+public static void reverseString(char[] s) {
+    int left = 0;
+    int right = s.length - 1;
+    while (left < right) {
+        char temp = s[left];
+        s[left] = s[right];
+        s[right] = temp;
+        left++;
+        right--;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 public static void main(String[] args) {
     int[] nums = {1, 1, 2, 3, 3, 4};
+//    int[] num = towSun(nums,3);
+//    for(int i = 0 ; i< num.length;i++){
+//        System.out.println(num[i]);
+//    }
 
     //删除有序数组中的重复项
 //    int newLength = removeDuplicates(nums);
