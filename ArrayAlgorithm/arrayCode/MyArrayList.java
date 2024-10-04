@@ -4,6 +4,7 @@ import java.util.NoSuchElementException;
 
 public class MyArrayList<E> {
 
+
     private static final int INIT_CAP = 1;
     private E[] data;
     private int size;
