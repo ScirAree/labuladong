@@ -1,5 +1,5 @@
+//双指针技巧秒杀七道数组题目
 import linkedListCode.ListNode;
-
 
 //删除有序数组中的重复项
 public static int removeDuplicates(int[] nums) {
@@ -110,6 +110,40 @@ public static void reverseString(char[] s) {
     }
 }
 
+
+//回文串判断
+public static boolean isPalindrome(String s) {
+    int left = 0, right = s.length() - 1;
+    while (left < right) {
+        if (s.charAt(left) != s.charAt(right)) {
+            return false;
+        }
+        left++;
+        right--;
+    }
+    return true;
+}
+
+
+//最长回文串
+public static String palindrome(String s, int l, int r) {
+    while (l >= 0 && r < s.length() && s.charAt(l) == s.charAt(r)) {
+        l--;
+        r++;
+    }
+    return s.substring(l + 1, r);
+}
+
+public static String longestPalindrome(String s) {
+    String res = "";
+    for (int i = 0; i < s.length(); i++) {
+        String s1 = palindrome(s, i, i);
+        String s2 = palindrome(s, i, i + 1);
+        res = res.length() > s1.length() ? res : s1;
+        res = res.length() > s2.length() ? res : s2;
+    }
+    return res;
+}
 
 
 
