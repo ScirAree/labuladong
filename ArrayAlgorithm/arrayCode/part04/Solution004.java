@@ -1,6 +1,9 @@
 //[强化练习 数组双指针经典习题]
 
-//删除有序数组中的重复项II
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
 public static int removeDuplicates(int[] nums) {
     if (nums.length == 0) return 0;
     int slow = 0, fast = 0;
@@ -64,6 +67,84 @@ public static void merge(int[] nums1, int m, int[] nums2, int n) {
         j--;
         p--;
     }
+}
+
+
+//有序数组的平方
+public static int[] sortedSquares(int[] nums) {
+    int n = nums.length;
+    int i = 0, j = n - 1;
+    int p = n - 1;
+    int[] res = new int[n];
+    while (i <= j) {
+        if (Math.abs(nums[i]) > Math.abs(nums[j])) {
+            res[p] = nums[i] * nums[i];
+            i++;
+        } else {
+            res[p] = nums[j] * nums[j];
+            j--;
+        }
+        p--;
+    }
+    return res;
+}
+
+
+//有序转化数组
+public static int[] sortTransformedArray(int[] nums, int a, int b, int c) {
+    int i = 0, j = nums.length - 1;
+    int p = a > 0 ? nums.length - 1 : 0;
+    int[] res = new int[nums.length];
+    while (i <= j) {
+        int v1 = f(nums[i], a, b, c);
+        int v2 = f(nums[j], a, b, c);
+        if (a > 0) {
+            if (v1 > v2) {
+                res[p--] = v1;
+                i++;
+            } else {
+                res[p--] = v2;
+                j--;
+            }
+        } else {
+            if (v1 > v2) {
+                res[p++] = v2;
+                j--;
+            } else {
+                res[p++] = v1;
+                i++;
+            }
+        }
+    }
+    return res;
+}
+
+public static int f(int x, int a, int b, int c) {
+    return a * x * x + b * x + c;
+}
+
+
+//将矩阵按对角线排序
+public static int[][] diagonalSort(int[][] mat) {
+    int m = mat.length, n = mat[0].length;
+    HashMap<Integer, ArrayList<Integer>> diagonals = new HashMap<>();
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            int diagonalId = i - j;
+            diagonals.putIfAbsent(diagonalId, new ArrayList<>());
+            diagonals.get(diagonalId).add(mat[i][j]);
+        }
+    }
+    for (ArrayList<Integer> diagonal : diagonals.values()) {
+        diagonal.sort(Collections.reverseOrder());
+    }
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            ArrayList<Integer> diagonal = diagonals.get(i - j);
+            mat[i][j] = diagonal.removeLast();
+        }
+    }
+    return mat;
 }
 
 

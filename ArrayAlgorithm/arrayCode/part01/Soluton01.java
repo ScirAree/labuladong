@@ -1,6 +1,7 @@
 //双指针技巧秒杀七道数组题目
 import linkedListCode.ListNode;
 
+
 //删除有序数组中的重复项
 public static int removeDuplicates(int[] nums) {
     if (nums.length == 0) {
@@ -134,6 +135,7 @@ public static String palindrome(String s, int l, int r) {
     return s.substring(l + 1, r);
 }
 
+
 public static String longestPalindrome(String s) {
     String res = "";
     for (int i = 0; i < s.length(); i++) {
@@ -144,17 +146,6 @@ public static String longestPalindrome(String s) {
     }
     return res;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 public static void main(String[] args) {

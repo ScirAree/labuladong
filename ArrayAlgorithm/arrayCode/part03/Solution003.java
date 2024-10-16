@@ -100,6 +100,7 @@ public static List<List<Integer>> threeSumTarget(int[] nums, int start, int targ
     return res;
 }
 
+
 //4Sum问题
 public static List<List<Integer>> fourSum(int[] nums, int target) {
     Arrays.sort(nums);
@@ -116,6 +117,39 @@ public static List<List<Integer>> fourSum(int[] nums, int target) {
     return res;
 }
 
+
+//100Sum问题
+public static List<List<Integer>> nSumTarget(int[] nums, int n, int start, int target) {
+    int sz = nums.length;
+    List<List<Integer>> res = new ArrayList<>();
+    if (n < 2 || sz < n) return res;
+    if (n == 2) {
+        int lo = start, hi = sz - 1;
+        while (lo < hi) {
+            int sum = nums[lo] + nums[hi];
+            int left = nums[lo], right = nums[hi];
+            if (sum < target) {
+                while (lo < hi && nums[lo] == left) lo++;
+            } else if (sum > target) {
+                while (lo < hi && nums[hi] == right) hi--;
+            } else {
+                res.add(new ArrayList<>(Arrays.asList(left, right)));
+                while (lo < hi && nums[lo] == left) lo++;
+                while (lo > hi && nums[hi] == right) hi--;
+            }
+        }
+    } else {
+        for (int i = start; i < sz; i++) {
+            List<List<Integer>> sub = nSumTarget(nums, n - 1, i + 1, target - nums[i]);
+            for (List<Integer> arr : sub) {
+                arr.add(nums[i]);
+                res.add(arr);
+            }
+            while (i < sz - 1 && nums[i] == nums[i + 1]) i++;
+        }
+    }
+    return res;
+}
 
 
 public void main() {
