@@ -3,6 +3,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 public static int removeDuplicates(int[] nums) {
     if (nums.length == 0) return 0;
@@ -118,7 +119,6 @@ public static int[] sortTransformedArray(int[] nums, int a, int b, int c) {
     }
     return res;
 }
-
 public static int f(int x, int a, int b, int c) {
     return a * x * x + b * x + c;
 }
@@ -148,6 +148,60 @@ public static int[][] diagonalSort(int[][] mat) {
 }
 
 
+//二维网格迁移
+public static List<List<Integer>> shiftGrid(int[][] grid, int k) {
+    int m = grid.length, n = grid[0].length;
+    int mn = m * n;
+    k = k % mn;
+    reverse(grid, mn - k, mn - 1);
+    reverse(grid, 0, mn - k - 1);
+    reverse(grid, 0, mn - 1);
+
+    List<List<Integer>> res = new ArrayList<>();
+    for (int[] row : grid) {
+        List<Integer> rowList = new ArrayList<>();
+        for (int e : row) {
+            rowList.add(e);
+        }
+        res.add(rowList);
+    }
+    return res;
+}
+
+public static int get(int[][] grid, int index) {
+    int n = grid[0].length;
+    int i = index / n, j = index % n;
+    return grid[i][j];
+}
+
+public static void set(int[][] grid, int index, int val) {
+    int n = grid[0].length;
+    int i = index / n, j = index % n;
+    grid[i][j] = val;
+}
+
+public static void reverse(int[][] grid, int i, int j) {
+    while (i < j) {
+        int temp = get(grid, i);
+        set(grid, i, get(grid, j));
+        set(grid, j, temp);
+        i++;
+        j--;
+    }
+}
+
+
+//转置矩阵
+public static int[][] transpose(int[][] matrix) {
+    int m = matrix.length, n = matrix[0].length;
+    int[][] res = new int[n][m];
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            res[j][i] = matrix[i][j];
+        }
+    }
+    return res;
+}
 public static void main(String[] args) {
 
 }
