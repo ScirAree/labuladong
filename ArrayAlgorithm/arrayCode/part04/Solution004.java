@@ -202,6 +202,26 @@ public static int[][] transpose(int[][] matrix) {
     }
     return res;
 }
+
+
+//最长公共前缀
+public static String longestCommonPrefix(String[] strs) {
+    int m = strs.length;
+    int n = strs[0].length();
+    for (int col = 0; col < n; col++) {
+        for (int row = 1; row < m; row++) {
+            String thisStr = strs[row], preStr = strs[row - 1];
+            if (col >= thisStr.length() || col >= preStr.length() || thisStr.charAt(col) != preStr.charAt(col)) {
+                return strs[row].substring(0, col);
+            }
+        }
+    }
+    return strs[0];
+}
+
 public static void main(String[] args) {
 
 }
+
+
+
